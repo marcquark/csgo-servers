@@ -8,6 +8,6 @@ npm install gamequery
 You also need an existing database. You can find the MySQL Workbench file in the Database folder. Creating the database and tables is currently up to you. As a security best practice i recommend you create two users, one that has write access to the tables (used for the serverpoller script) and one that has read-only access (for the frontend).
 Once your database is up and running, download the script, modify the credentials at the top and simply run it like so
 ```shell
-nodejs serverpoller.ks
+nodejs serverpoller.js
 ```
 Note: I also recommend you run this as an unprivileged user.
