@@ -1,7 +1,7 @@
 # csgo_serverlist
 A simple web application that keeps track of a set of CS:GO servers and lets users display them filtered by category and tags. Work in progress.
 ## Installation instructions
-The script requires [https://github.com/kurt-stolle/node-gamequery](node-gamequery). It can be installed from the command line.
+The script requires [node-gamequery](https://github.com/kurt-stolle/node-gamequery). It can be installed from the command line.
 ```shell
 npm install gamequery
 ```
