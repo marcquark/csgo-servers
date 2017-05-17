@@ -11,10 +11,10 @@ var polling_interval = 60; // polling interval in seconds. setting this too high
 var gamequery = require('gamequery');
 /* mysql connection setup and default error handling */
 var mysql = require('mysql').createConnection({
-  host     : mysql_host,
-  user     : mysql_user,
-  password : mysql_pw,
-  database : mysql_db,
+  host     : config.db.host,
+  user     : config.db.rw_user,
+  password : config.db.rw_pw,
+  database : config.db.database,
 });
 mysql.on('error', function(err) {
   console.error((new Date()).toISOString() + ' sql connection error:' + err.stack);
@@ -23,7 +23,7 @@ mysql.on('error', function(err) {
 
 /* this function queries a single server using game-server-query */
 function query_server(element, index, array) { // necessary prototype for forEach, we will only need the element object
-  if(verbose) {
+  if(config.logging.verbose) {
     console.log((new Date()).toISOString() + ' Querying ' + element.ip + ':' + element.port + ' (id ' + element.id + ')');
   }
 
@@ -53,7 +53,9 @@ function update_server_state(id, is_up, name, map, players, bots, players_max) {
 
 /* this function grabs a server list from the database and queries every single server. the query callback will then update the server's state*/
 function main_loop() {
-  console.log((new Date()).toISOString() + ' fetching server list');
+  if(config.logging.enabled) {
+    console.log((new Date()).toISOString() + ' fetching server list');
+  }
   mysql.query('SELECT `id`,`ip`,`port` FROM `gameservers`', function(err, rows, fields) {
     if(err) {
       console.error((new Date()).toISOString() + ' could not fetch the serverlist from the database: ' + err.stack);
@@ -64,8 +66,10 @@ function main_loop() {
   });
 }
 
-console.log((new Date()).toISOString() + ' launched ');
-console.log((new Date()).toISOString() + ' connecting to mysql server');
+if(config.logging.enabled) {
+  console.log((new Date()).toISOString() + ' launched ');
+  console.log((new Date()).toISOString() + ' connecting to mysql server');
+}
 mysql.connect();
 main_loop();
-var mainInterval = setInterval(main_loop, polling_interval*1000);
+var mainInterval = setInterval(main_loop, config.interval*1000);
