@@ -22,24 +22,25 @@ function query_server(element, index, array) { // necessary prototype for forEac
   gamequery.query({
     type: 'csgo',
     host: element.ip,
-    port: element.port,
-    notes: element.id
-  },
-  function(error, state) {
-    if(error) {
-      if(config.logging.verbose) {
-        console.error(error);
-      }
+    port: element.port
+  }).then((state) => {
+    update_server_state(element.id, true, state.name.trim(), state.map, state.players.length, state.bots.length, state.maxplayers);
+  }).catch((error) => {
+    if(config.logging.verbose) {
+      console.log((new Date()).toISOString() + ' Query on ' + element.ip + ':' + element.port + ' (id ' + element.id + ') failed: ' + error);
     }
-    else {
-      update_server_state(state.notes, true, state.name.trim(), state.map, state.players.length, state.bots.length, state.maxplayers);
-    }
+    update_server_state(element.id, false);
   });
 }
 
 /* this function updates a server's state in the database */
-function update_server_state(id, name, map, players, bots, players_max) {
-  fields = {is_up: '1', name: name, map: map, players: players, bots: bots, players_max: players_max};
+function update_server_state(id, is_up, name, map, players, bots, players_max) {
+  if(!is_up) {
+    fields = {is_up: '0'};
+  }
+  else {
+    fields = {is_up: '1', name: name, map: map, players: players, bots: bots, players_max: players_max};
+  }
 
   mysql.query('UPDATE `gameservers` SET ? WHERE `id` = ?', [fields,id], function (err, rows, fields) {
     if(err) console.error((new Date()).toISOString() + ' ' + err);
