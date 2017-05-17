@@ -7,6 +7,7 @@ router.get('/', function(req, res) {
     var meta = {};
     hub.mariaSqlClientRO.query('SELECT `id`,`name` FROM `tags`', function(err, rows) {
         if(err) {
+            // TODO: log
             res.sendStatus(500);
             return;
         }
@@ -15,6 +16,7 @@ router.get('/', function(req, res) {
 
         hub.mariaSqlClientRO.query('SELECT `id`,`name` FROM `types`', function(err, rows) {
             if(err) {
+                // TODO: log
                 res.sendStatus(500);
                 return;
             }
