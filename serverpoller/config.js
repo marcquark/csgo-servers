@@ -11,3 +11,5 @@ var config = {
         database:   'db'
     }
 }
+
+module.exports = config;

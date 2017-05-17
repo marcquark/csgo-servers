@@ -1,12 +1,4 @@
-var verbose    = false; // this will make the script log every server it queries with ip:port
-var mysql_host = 'localhost';
-var mysql_user = 'user';
-var mysql_pw   = 'password';
-var mysql_db   = 'db';
-var polling_interval = 60; // polling interval in seconds. setting this too high might trigger ddos protections
-
-
-/********* NO TOUCHEY **********/
+var config = require('./config');
 
 var gamequery = require('gamequery');
 /* mysql connection setup and default error handling */
