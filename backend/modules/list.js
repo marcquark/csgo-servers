@@ -5,7 +5,7 @@ var router  = express.Router();
 
 router.get('/', function(req, res) {
 
-    let queryString = 'SELECT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max` FROM `gameservers`,`servertags` WHERE `gameservers`.`is_up` = 1';
+    let queryString = 'SELECT DISTINCT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max` FROM `gameservers`,`servertags` WHERE `gameservers`.`is_up` = 1';
 
     if(req.query.category) {
         // handle arrays
