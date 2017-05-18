@@ -7,24 +7,24 @@ router.get('/', function(req, res) {
 
     let queryString = 'SELECT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max` FROM `gameservers`,`servertags` WHERE `gameservers`.`is_up` = 1';
 
-    if(req.query.type) {
+    if(req.query.category) {
         // handle arrays
-        if(Array.isArray(req.query.type)) {
-            // do not use more than one type. when multiple types are supplied, only the first one is used
-            req.query.type = req.query.type[0];
+        if(Array.isArray(req.query.category)) {
+            // do not use more than one category. when multiple categories are supplied, only the first one is used
+            req.query.category = req.query.category[0];
         }
 
-        req.query.type = Number.parseInt(req.query.type);
+        req.query.category = Number.parseInt(req.query.category);
 
         // handle invalid input
-        if(!Number.isFinite(req.query.type)) {
+        if(!Number.isFinite(req.query.category)) {
             // user tried to pass something that can not be parsed to a finite integer
             // TODO: log (verbose)
             res.sendStatus(400);
             return;
         }
 
-        queryString += ' AND `gameservers`.`type` = ' + req.query.type;
+        queryString += ' AND `gameservers`.`category` = ' + req.query.category;
     }
 
     if(req.query.tag) {

@@ -14,14 +14,14 @@ router.get('/', function(req, res) {
 
         meta.tags = rows;
 
-        hub.mariaSqlClientRO.query('SELECT `id`,`name` FROM `types`', function(err, rows) {
+        hub.mariaSqlClientRO.query('SELECT `id`,`name` FROM `categories`', function(err, rows) {
             if(err) {
                 // TODO: log
                 res.sendStatus(500);
                 return;
             }
 
-            meta.types = rows;
+            meta.categories = rows;
 
             res.send(meta);
         });
