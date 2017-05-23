@@ -9,15 +9,16 @@ hub.mariaSqlClientRO    = new hub.mariasql({
     password:           config.db.ro_pw,
     db:                 config.db.database,
     unixSocket:         '/var/run/mysqld/mysqld.sock',
-})
-hub.mariaSqlClientRW    = new hub.mariasql({
+});
+// currently not in use.
+/*hub.mariaSqlClientRW    = new hub.mariasql({
     // this is the read-write sql connection. you can also TCP instead of a unix socket here.
     // refer to https://github.com/mscdex/node-mariasql
     user:               config.db.rw_user,
     password:           config.db.rw_pw,
     db:                 config.db.database,
     unixSocket:         '/var/run/mysqld/mysqld.sock',
-})
+});*/
 
 var express     = require('express');
 var list        = require('./modules/list');
@@ -32,6 +33,6 @@ app.use('/api/meta', meta);
 // adjust host and port here if needed
 app.listen(config.webserver.port, config.webserver.host, function() {
     if(config.logging.enabled) {
-        console.log('Express server listening at ' + this.address().address + ':' + this.address().port + ' in ' + app.settings.env + ' mode');
+        console.log((new Date()).toISOString() + 'Express server listening at ' + this.address().address + ':' + this.address().port + ' in ' + app.settings.env + ' mode');
     }
 });
