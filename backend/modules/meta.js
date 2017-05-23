@@ -23,7 +23,7 @@ router.get('/', function(req, res) {
 
             meta.categories = rows;
 
-            res.send(meta);
+            res.json(meta);
         });
     });
 });

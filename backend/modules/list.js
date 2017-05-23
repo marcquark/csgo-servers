@@ -60,7 +60,7 @@ router.get('/', function(req, res) {
             return;
         }
 
-        res.send({servers: rows});
+        res.json({servers: rows});
     });
 
     // TODO: log (verbose)
