@@ -3,12 +3,21 @@ A simple web application that keeps track of a set of CS:GO servers and lets use
 ## Installation instructions
 #### General
 You need an existing database. You can find the MySQL Workbench file in the Database folder. Creating the database and tables is currently up to you. As a security best practice i recommend you create two users, one that has write access to the tables (used for the serverpoller script) and one that has read-only access (for the backend server). Once your database is up and running, download the scripts and put them in seperate folders.
+#### Forever (optional)
+I highly recommend using forever to run the scripts as daemons. It automatically restarts your app when it crashes.
+```shell
+sudo npm install forever -g
+```
 #### Serverpoller
 Put the folder where you want it to be, for example /home/pollinguser/serverpoller, and from the CLI run.
 ```shell
 npm install
 ```
 Then simply modify the MySQL credentials inside the config.js to fit your setup and run the script.
+```shell
+forever start -l /path/to/forever_serverpoller.log -o /path/to/serverpoller.log -e /path/to/serverpoller.err -a index.js
+```
+If you're not using forever:
 ```shell
 node index.js
 ```
@@ -19,6 +28,10 @@ Put the folder where you want it to be, for example /home/backenduser/backend, a
 npm install
 ```
 Then simply modify the MySQL credentials inside the config.js to fit your setup and run the script.
+```shell
+forever start -l /path/to/forever_backend.log -o /path/to/backend.log -e /path/to/backend.err -a server.js
+```
+If you're not using forever:
 ```shell
 node server.js
 ```
