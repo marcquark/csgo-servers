@@ -9,6 +9,7 @@ hub.mariaSqlClientRO    = new hub.mariasql({
     password:           config.db.ro_pw,
     db:                 config.db.database,
     unixSocket:         '/var/run/mysqld/mysqld.sock',
+    charset:            'utf8'
 });
 // currently not in use.
 /*hub.mariaSqlClientRW    = new hub.mariasql({
@@ -18,6 +19,7 @@ hub.mariaSqlClientRO    = new hub.mariasql({
     password:           config.db.rw_pw,
     db:                 config.db.database,
     unixSocket:         '/var/run/mysqld/mysqld.sock',
+    charset:            'utf8'
 });*/
 
 var express     = require('express');
