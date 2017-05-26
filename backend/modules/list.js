@@ -8,12 +8,6 @@ router.get('/', function(req, res) {
     let queryString = 'SELECT DISTINCT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max` FROM `gameservers`,`servertags` WHERE `gameservers`.`is_up` = 1';
 
     if(req.query.category) {
-        // handle arrays
-        if(Array.isArray(req.query.category)) {
-            // do not use more than one category. when multiple categories are supplied, only the first one is used
-            req.query.category = req.query.category[0];
-        }
-
         req.query.category = Number.parseInt(req.query.category);
 
         // handle invalid input
