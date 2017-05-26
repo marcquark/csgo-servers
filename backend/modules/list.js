@@ -51,7 +51,39 @@ router.get('/', function(req, res) {
         queryString += req.query.tag.toString() + ')';
     }
 
-    queryString += " ORDER BY `players` DESC";
+    if(req.query.notfull) {
+        req.query.notfull = Number.parseInt(req.query.notfull);
+
+        // handle invalid input
+        if(!Number.isFinite(req.query.notfull)) {
+            // user tried to pass something that can not be parsed to a finite integer
+            // TODO: log (verbose)
+            res.sendStatus(400);
+            return;
+        }
+
+        if(req.query.notfull == 1) {
+            queryString += ' AND `gameservers`.`players` < `gameservers`.`players_max`';
+        }
+    }
+
+    if(req.query.notempty) {
+        req.query.notempty = Number.parseInt(req.query.notempty);
+
+        // handle invalid input
+        if(!Number.isFinite(req.query.notempty)) {
+            // user tried to pass something that can not be parsed to a finite integer
+            // TODO: log (verbose)
+            res.sendStatus(400);
+            return;
+        }
+
+        if(req.query.notempty == 1) {
+            queryString += ' AND `gameservers`.`players` > 0';
+        }
+    }
+
+    queryString += ' ORDER BY `gameservers`.`players` DESC';
 
     hub.mariaSqlClientRO.query(queryString, function(err, rows) {
         if(err) {
