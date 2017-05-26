@@ -18,7 +18,9 @@ router.get('/', function(req, res) {
             return;
         }
 
-        queryString += ' AND `gameservers`.`category` = ' + req.query.category;
+        if(req.query.category > 0) {
+            queryString += ' AND `gameservers`.`category` = ' + req.query.category;
+        }
     }
 
     if(req.query.tag) {
