@@ -15,7 +15,7 @@ npm install
 ```
 Then simply modify the MySQL credentials inside the config.js to fit your setup and run the script.
 ```shell
-forever start -l /path/to/forever_serverpoller.log -o /path/to/serverpoller.log -e /path/to/serverpoller.err -a index.js
+forever start -l /path/to/forever_serverpoller.log -a index.js
 ```
 If you're not using forever:
 ```shell
@@ -29,7 +29,7 @@ npm install
 ```
 Then simply modify the MySQL credentials inside the config.js to fit your setup and run the script.
 ```shell
-forever start -l /path/to/forever_backend.log -o /path/to/backend.log -e /path/to/backend.err -a server.js
+forever start -l /path/to/forever_backend.log -a server.js
 ```
 If you're not using forever:
 ```shell
