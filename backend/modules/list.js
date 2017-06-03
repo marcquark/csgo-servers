@@ -5,7 +5,7 @@ var router  = express.Router();
 
 router.get('/', function(req, res) {
 
-    let queryString = 'SELECT DISTINCT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max` FROM `gameservers`,`servertags` WHERE `gameservers`.`is_up` = 1';
+    let queryString = 'SELECT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max`,GROUP_CONCAT(`servertags`.`tags_id`) AS `tags` FROM `gameservers` LEFT JOIN `servertags` ON `gameservers`.`id` = `servertags`.`gameservers_id` WHERE `gameservers`.`is_up` = 1';
 
     if(req.query.category) {
         req.query.category = Number.parseInt(req.query.category);
@@ -29,8 +29,6 @@ router.get('/', function(req, res) {
             req.query.tag = new Array(req.query.tag);
         }
 
-        queryString += ' AND `gameservers`.`id` = `servertags`.`gameservers_id` AND `servertags`.`tags_id` IN (';
-
         // handle invalid input
         let tags = req.query.tag.length;
         for(let i = 0; i < tags; i++) {
@@ -44,7 +42,29 @@ router.get('/', function(req, res) {
             }
         }
 
-        queryString += req.query.tag.toString() + ')';
+        queryString += ' AND `gameservers`.`id` IN (SELECT DISTINCT `gameservers_id` FROM `servertags` WHERE `tags_id` IN (' + req.query.tag.toString() + '))';
+    }
+
+    if(req.query.notag) {
+        if(!Array.isArray(req.query.notag)) {
+            // if there is only one tag selected, create an array anyway so that we don't need to copy+paste the routine below
+            req.query.notag = new Array(req.query.notag);
+        }
+
+        // handle invalid input
+        let tags = req.query.notag.length;
+        for(let i = 0; i < tags; i++) {
+            req.query.notag[i] = Number.parseInt(req.query.notag[i]);
+
+            if(!Number.isFinite(req.query.notag[i])) {
+                // user tried to pass something that can not be parsed to a finite integer
+                // TODO: log (verbose)
+                res.sendStatus(400);
+                return;
+            }
+        }
+
+        queryString += ' AND `gameservers`.`id` NOT IN (SELECT DISTINCT `gameservers_id` FROM `servertags` WHERE `tags_id` IN (' + req.query.notag.toString() + '))';
     }
 
     if(req.query.notfull) {
@@ -79,7 +99,7 @@ router.get('/', function(req, res) {
         }
     }
 
-    queryString += ' ORDER BY `gameservers`.`players` DESC';
+    queryString += ' GROUP BY `gameservers`.`id` ORDER BY `gameservers`.`players` DESC';
 
     hub.mariaSqlClientRO.query(queryString, function(err, rows) {
         if(err) {
