@@ -5,7 +5,7 @@ var router  = express.Router();
 
 router.get('/', function(req, res) {
 
-    let queryString = 'SELECT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max`,GROUP_CONCAT(`servertags`.`tags_id`) AS `tags` FROM `gameservers` LEFT JOIN `servertags` ON `gameservers`.`id` = `servertags`.`gameservers_id` WHERE `gameservers`.`is_up` = 1';
+    let queryString = 'SELECT `gameservers`.`id`,`gameservers`.`ip`,`gameservers`.`port`,`gameservers`.`map`,`gameservers`.`category`,`gameservers`.`name`,`gameservers`.`players`,`gameservers`.`bots`,`gameservers`.`players_max`,GROUP_CONCAT(`servertags`.`tags_id`) AS `tags` FROM `gameservers` LEFT JOIN `servertags` ON `gameservers`.`id` = `servertags`.`gameservers_id` WHERE `gameservers`.`is_up` = 1';
 
     if(req.query.category) {
         req.query.category = Number.parseInt(req.query.category);
