@@ -5,7 +5,7 @@ var router  = express.Router();
 
 router.get('/', function(req, res) {
     var meta = {};
-    hub.mariaSqlClientRO.query('SELECT `id`,`name` FROM `tags`', function(err, rows) {
+    hub.mariaSqlClientRO.query('SELECT `id`,`name` FROM `tags` ORDER BY `priority` DESC', function(err, rows) {
         if(err) {
             // TODO: log
             res.sendStatus(500);
