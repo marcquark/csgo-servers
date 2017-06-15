@@ -1,0 +1,23 @@
+.jumbotron {
+	background-color: white;
+}
+
+header.jumbotron {
+	margin-bottom: 0;
+}
+
+footer.jumbotron {
+	margin-bottom: 0;
+
+	padding-top: 15px;
+	padding-bottom: 5px;
+}
+
+#categoryPicker {
+	width: 125px;
+}
+
+#tagSelector button {
+	margin-left: 2px;
+	margin-right: 2px;
+}
