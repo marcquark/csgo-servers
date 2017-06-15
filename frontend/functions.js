@@ -1,3 +1,8 @@
+var config = {
+	metaUrl: 'https://www.csgo-servers.eu/api/meta',
+	listUrl: 'https://www.csgo-servers.eu/api/list'
+}
+
 var meta;
 
 $(document).ready(function(){
@@ -6,7 +11,7 @@ $(document).ready(function(){
 
 function updateMeta() {
 	$.ajax({
-		url: 'https://www.csgo-servers.eu/api/meta',
+		url: config.metaUrl,
 		dataType: 'json',
 		success: function(data) {
 			meta = data;
@@ -38,7 +43,7 @@ function updateMeta() {
 			}
 
 			$('#serversTable').bootstrapTable({
-				url: "https://www.csgo-servers.eu/api/list"
+				url: config.listUrl
 			});
 		},
 		error: function(e) {
