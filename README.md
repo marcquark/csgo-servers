@@ -23,6 +23,10 @@ node index.js
 ```
 Note: I recommend you run this as an unprivileged user.
 #### Backend
+Since the mariasql package is being compiled upon installation, make sure you have the required tools set up on your machine.
+```shell
+sudo apt-get install -y build-essential
+```
 Put the folder where you want it to be, for example /home/backenduser/backend, and from the CLI run.
 ```shell
 npm install
