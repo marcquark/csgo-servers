@@ -1,4 +1,4 @@
-# csgo_serverlist
+# csgo-servers
 A simple web application that keeps track of a set of CS:GO servers and lets users display them filtered by category and tags. Work in progress. Tested on nodejs v6.10.3 and MariaDB 10.0.29
 ## Installation instructions
 #### General

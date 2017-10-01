@@ -1,7 +1,7 @@
 {
   "name": "serverpoller",
   "version": "1.0.0",
-  "description": "Polling script of github.com/marcquark/csgo_serverlist",
+  "description": "Polling script of github.com/marcquark/csgo-servers",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
