@@ -103,7 +103,7 @@ function apiQueryParams(params) {
 }
 
 function ipFormatter(value, row, index) {
-	return '<a href="steam://connect/' + value + '">' + value + '</a>';
+	return '<button class="btn btn-default btn-xs" data-clipboard-text="connect ' + value + '"><span class="fa fa-clipboard"></span></button> <a href="steam://connect/' + value + '">' + value + '</a>';
 }
 
 function playersFormatter(value, row, index) {
