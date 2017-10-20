@@ -1,0 +1,69 @@
+{
+  "name": "server",
+  "plural": "servers",
+  "base": "PersistedModel",
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "ipport": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "default": "no name"
+    },
+    "map": {
+      "type": "string",
+      "default": "no map"
+    },
+    "players": {
+      "type": "number",
+      "default": 0
+    },
+    "bots": {
+      "type": "number",
+      "default": 0
+    },
+    "players_max": {
+      "type": "number",
+      "default": 0
+    },
+    "is_up": {
+      "type": "boolean",
+      "default": false
+    }
+  },
+  "validations": [],
+  "relations": {
+    "category": {
+      "type": "belongsTo",
+      "model": "category"
+    },
+    "tags": {
+      "type": "referencesMany",
+      "model": "tag",
+      "foreignKey": "tagIds"
+    }
+  },
+  "acls": [{
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "DENY"
+  }, {
+    "accessType": "READ",
+    "principalType": "ROLE",
+    "principalId": "$everyone",
+    "permission": "ALLOW"
+  }, {
+    "principalType": "ROLE",
+    "principalId": "admin",
+    "permission": "ALLOW"
+  }, {
+    "principalType": "ROLE",
+    "principalId": "editor",
+    "permission": "ALLOW"
+  }],
+  "methods": {},
+  "strict": true
+}

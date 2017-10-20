@@ -1,0 +1,86 @@
+{
+  "_meta": {
+    "sources": [
+      "loopback/common/models",
+      "loopback/server/models",
+      "../common/models",
+      "./models"
+    ],
+    "mixins": [
+      "loopback/common/mixins",
+      "loopback/server/mixins",
+      "../common/mixins",
+      "./mixins"
+    ]
+  },
+  "User": {
+    "dataSource": "mongodb",
+    "public": true,
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }]
+  },
+  "AccessToken": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "ACL": {
+    "dataSource": "mongodb",
+    "public": false
+  },
+  "RoleMapping": {
+    "dataSource": "mongodb",
+    "public": true,
+    "options": {
+      "strictObjectIDCoercion": true
+    },
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }, {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$authenticated",
+      "permission": "ALLOW",
+      "property": "findOne"
+    }]
+  },
+  "Role": {
+    "dataSource": "mongodb",
+    "public": true,
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }]
+  },
+  "server": {
+    "dataSource": "mongodb",
+    "public": true,
+    "strict": true,
+    "validateUpsert": true
+  },
+  "category": {
+    "dataSource": "mongodb",
+    "public": true,
+    "strict": true,
+    "validateUpsert": true
+  },
+  "tag": {
+    "dataSource": "mongodb",
+    "public": true,
+    "strict": true,
+    "validateUpsert": true
+  }
+}
