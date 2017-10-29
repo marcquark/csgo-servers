@@ -69,18 +69,72 @@
     "dataSource": "mongodb",
     "public": true,
     "strict": true,
-    "validateUpsert": true
+    "validateUpsert": true,
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }, {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "editor",
+      "permission": "ALLOW"
+    }]
   },
   "category": {
     "dataSource": "mongodb",
     "public": true,
     "strict": true,
-    "validateUpsert": true
+    "validateUpsert": true,
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }, {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "editor",
+      "permission": "ALLOW"
+    }]
   },
   "tag": {
     "dataSource": "mongodb",
     "public": true,
     "strict": true,
-    "validateUpsert": true
+    "validateUpsert": true,
+    "acls": [{
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "DENY"
+    }, {
+      "accessType": "READ",
+      "principalType": "ROLE",
+      "principalId": "$everyone",
+      "permission": "ALLOW"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "admin",
+      "permission": "ALLOW"
+    }, {
+      "principalType": "ROLE",
+      "principalId": "editor",
+      "permission": "ALLOW"
+    }]
   }
 }
