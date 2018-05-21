@@ -4,13 +4,12 @@
     "connector": "memory"
   },
   "mongodb": {
+    "name": "mongodb",
+    "connector": "mongodb",
     "host": "localhost",
     "port": 27017,
-    "url": "",
-    "database": "csgo-servers",
-    "password": "",
-    "name": "mongodb",
     "user": "",
-    "connector": "mongodb"
+    "password": "",
+    "database": "csgo-servers"
   }
 }
