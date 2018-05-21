@@ -1,4 +1,11 @@
 {
+  "initial": {
+    "cors": {
+      "params": {
+        "origin": "*"
+      }
+    }
+  },
   "final:after": {
     "strong-error-handler": {
       "params": {
