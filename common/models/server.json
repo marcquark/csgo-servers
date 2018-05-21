@@ -29,6 +29,10 @@
       "type": "number",
       "default": 0
     },
+    "is_full": {
+      "type": "boolean",
+      "default": false
+    },
     "is_up": {
       "type": "boolean",
       "default": false
