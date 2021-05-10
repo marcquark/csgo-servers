@@ -1,3 +1,5 @@
+> :warning: **This code is outdated and not actively maintained. There may be security vulnerabilities in the code and/or its dependencies. Do not run this thing in production! Feel free to fork and improve it.**
+
 # csgo-servers
 A simple web application that keeps track of a set of CS:GO servers and lets users display them filtered by category and tags. Work in progress. v2 is based on [loopback](https://loopback.io)
 ## Installation instructions
